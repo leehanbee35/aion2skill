@@ -1,7 +1,10 @@
 import { useState } from "react";
 import {
   CLASS_SKILLS,
+  CLASSES,
   TARGET_OPTIONS,
+  TARGET_OPTIONS_30,
+  SKILLS_WITH_30,
   DAEVANIAN_VALUES,
   DAEVANIAN_DEFAULT,
   EQUIPMENT_VALUES,
@@ -13,13 +16,11 @@ import {
 import Select from "./components/Select";
 import "./App.css";
 
-const CLASS = "호법성";
-const SKILLS = CLASS_SKILLS[CLASS];
-const STORAGE_KEY = "aion2-skills-호법성";
+const DIRECT_OPTIONS = Array.from({ length: 11 }, (_, i) => i);
 
-function createInitialState() {
+function createClassState(className) {
   return Object.fromEntries(
-    SKILLS.map((skill) => [
+    CLASS_SKILLS[className].map((skill) => [
       skill,
       {
         target: 0,
@@ -32,52 +33,85 @@ function createInitialState() {
   );
 }
 
-function loadState() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return createInitialState();
-    const parsed = JSON.parse(saved);
-    const defaults = createInitialState();
-    return Object.fromEntries(
-      SKILLS.map((skill) => [skill, { ...defaults[skill], ...parsed[skill] }])
-    );
-  } catch {
-    return createInitialState();
-  }
+function loadAllState() {
+  return Object.fromEntries(
+    CLASSES.map((cls) => {
+      try {
+        const saved = localStorage.getItem(`aion2-skills-${cls}`);
+        if (!saved) return [cls, createClassState(cls)];
+        const parsed = JSON.parse(saved);
+        const defaults = createClassState(cls);
+        return [cls, Object.fromEntries(
+          CLASS_SKILLS[cls].map((skill) => [skill, { ...defaults[skill], ...parsed[skill] }])
+        )];
+      } catch {
+        return [cls, createClassState(cls)];
+      }
+    })
+  );
 }
 
 function getTotal(s) {
   return s.direct + s.daevanian + s.equipment + s.arcana.reduce((a, b) => a + b, 0);
 }
 
-const DIRECT_OPTIONS = Array.from({ length: 11 }, (_, i) => i);
-
 export default function App() {
-  const [skills, setSkills] = useState(loadState);
+  const [activeClass, setActiveClass] = useState(() => {
+    const saved = localStorage.getItem("aion2-active-class");
+    return CLASSES.includes(saved) ? saved : CLASSES[0];
+  });
+  const [allSkills, setAllSkills] = useState(loadAllState);
+
+  const skills = allSkills[activeClass];
 
   function update(skill, field, value) {
-    setSkills((prev) => {
-      const next = { ...prev, [skill]: { ...prev[skill], [field]: value } };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    setAllSkills((prev) => {
+      const next = {
+        ...prev,
+        [activeClass]: {
+          ...prev[activeClass],
+          [skill]: { ...prev[activeClass][skill], [field]: value }
+        }
+      };
+      localStorage.setItem(`aion2-skills-${activeClass}`, JSON.stringify(next[activeClass]));
       return next;
     });
   }
 
   function updateArcana(skill, index, value) {
-    setSkills((prev) => {
-      const newArcana = [...prev[skill].arcana];
+    setAllSkills((prev) => {
+      const newArcana = [...prev[activeClass][skill].arcana];
       newArcana[index] = value;
-      const next = { ...prev, [skill]: { ...prev[skill], arcana: newArcana } };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      const next = {
+        ...prev,
+        [activeClass]: {
+          ...prev[activeClass],
+          [skill]: { ...prev[activeClass][skill], arcana: newArcana }
+        }
+      };
+      localStorage.setItem(`aion2-skills-${activeClass}`, JSON.stringify(next[activeClass]));
       return next;
     });
   }
 
+  const cardSkills = ARCANA_CARD_SKILLS[activeClass];
+  const skillsWith30 = SKILLS_WITH_30[activeClass] || [];
+
   return (
     <div className="app">
       <header className="app-header">
-        <h1>스킬 최적화</h1>
-        <span className="class-badge">{CLASS}</span>
+        <h1>오리 스킬계산기</h1>
+        <div className="tabs">
+          {CLASSES.map((cls) => (
+            <button
+              key={cls}
+              className={`tab ${activeClass === cls ? "tab--active" : ""}`}
+              onClick={() => { setActiveClass(cls); localStorage.setItem("aion2-active-class", cls); }}
+            >
+              {cls}
+            </button>
+          ))}
+        </div>
       </header>
 
       <div className="table-scroll">
@@ -97,7 +131,7 @@ export default function App() {
             </tr>
           </thead>
           <tbody>
-            {SKILLS.map((skill) => {
+            {CLASS_SKILLS[activeClass].map((skill) => {
               const s = skills[skill];
               const total = getTotal(s);
               const diff = total - s.target;
@@ -109,7 +143,11 @@ export default function App() {
                   <td className="td-skill">{skill}</td>
 
                   <td>
-                    <Select value={s.target} options={TARGET_OPTIONS} onChange={(v) => update(skill, "target", v)} />
+                    <Select
+                      value={s.target}
+                      options={skillsWith30.includes(skill) ? TARGET_OPTIONS_30 : TARGET_OPTIONS}
+                      onChange={(v) => update(skill, "target", v)}
+                    />
                   </td>
 
                   <td className="group-start">
@@ -126,7 +164,7 @@ export default function App() {
 
                   {s.arcana.map((val, idx) => {
                     const cardName = ARCANA_CARD_NAMES[idx];
-                    const allowed = ARCANA_CARD_SKILLS[cardName];
+                    const allowed = cardSkills[cardName];
                     const canUse = allowed === null || allowed.includes(skill);
                     return (
                       <td key={idx} className={idx === 0 ? "group-start" : ""}>
