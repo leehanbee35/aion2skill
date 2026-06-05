@@ -1,0 +1,205 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  background: #f7f8fa;
+  color: #1a1d2e;
+  min-height: 100vh;
+}
+
+.app {
+  padding: 10px 16px;
+}
+
+/* ── 헤더 ── */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.app-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1d2e;
+  letter-spacing: -0.3px;
+}
+
+.class-badge {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8890b0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* ── 테이블 래퍼 ── */
+.table-scroll {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e8eaf0;
+}
+
+/* ── 테이블 ── */
+.skill-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  white-space: nowrap;
+  table-layout: fixed;
+}
+
+.skill-table th,
+.skill-table td {
+  width: 80px;
+}
+
+/* ── 헤더 행 ── */
+.skill-table thead tr {
+  border-bottom: 1px solid #e8eaf2;
+}
+
+.skill-table th {
+  padding: 8px 10px;
+  text-align: center;
+  color: #9098b8;
+  font-weight: 500;
+  font-size: 11px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.skill-table th .th-inner {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.skill-table th small {
+  color: #b8bdd0;
+  font-weight: 400;
+  font-size: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ── 데이터 행 ── */
+.skill-table td {
+  padding: 6px 10px;
+  text-align: center;
+  border-bottom: 1px solid #e8eaf2;
+}
+
+.th-skill,
+.td-skill {
+  text-align: left !important;
+  width: 110px;
+}
+
+.th-skill {
+  padding-left: 28px;
+}
+
+.td-skill {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1a1d2e;
+  padding-left: 28px;
+  padding-right: 24px;
+}
+
+/* ── 행 상태 ── */
+.row-ok,
+.row-lack {
+  background: #fff;
+}
+
+.row-ok:hover td,
+.row-lack:hover td {
+  background: #f7f8fc;
+}
+
+.row-disabled .td-skill,
+.row-disabled .cselect__trigger,
+.row-disabled .total-val,
+.row-disabled .badge {
+  opacity: 0.35;
+}
+
+/* ── 세로선 ── */
+.skill-table th + th,
+.skill-table td + td {
+  border-left: 1px solid #e8eaf2;
+}
+
+.group-start {
+  border-left: 1px solid #e8eaf2 !important;
+}
+
+.col-summary,
+.row-ok .col-summary,
+.row-lack .col-summary {
+  background: none;
+}
+
+/* ── 셀렉트 ── */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #f4f5f8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aab0c8' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 6px center;
+  border: 1px solid #e4e6ef;
+  border-radius: 6px;
+  color: #1a1d2e;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 4px 22px 4px 6px;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+select:hover { background-color: #eceef4; border-color: #c8ccdc; }
+select:focus { outline: none; background-color: #fff; border-color: #1a1d2e; }
+
+/* ── 합계 ── */
+.total-val {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.total-ok   { color: #3070d0; }
+.total-lack { color: #c03030; }
+
+/* ── 뱃지 ── */
+.badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.badge-ok {
+  background: #e8f0fd;
+  color: #2060c8;
+  border: 1px solid #c0d4f8;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.badge-lack {
+  background: #fdecea;
+  color: #c02828;
+  border: 1px solid #f5c0bc;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
