@@ -102,8 +102,9 @@ export const SKILLS_WITH_30 = {
 export const DAEVANIAN_VALUES = [0, 1, 2, 3, 4];
 export const DAEVANIAN_DEFAULT = 4;
 
-// 장비 수치 옵션 (0~10)
-export const EQUIPMENT_VALUES = Array.from({ length: 11 }, (_, i) => i);
+// 장비 수치 옵션
+export const EQUIPMENT_VALUES = Array.from({ length: 11 }, (_, i) => i); // 0~10 (30목표 스킬)
+export const EQUIPMENT_VALUES_LIMITED = [0, 1, 2]; // 0~2 (20목표 스킬)
 
 // 아르카나 카드 1개당 수치 옵션 (0~4)
 export const ARCANA_CARD_VALUES = [0, 1, 2, 3, 4];

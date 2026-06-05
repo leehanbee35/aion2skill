@@ -8,6 +8,7 @@ import {
   DAEVANIAN_VALUES,
   DAEVANIAN_DEFAULT,
   EQUIPMENT_VALUES,
+  EQUIPMENT_VALUES_LIMITED,
   ARCANA_CARD_VALUES,
   ARCANA_CARD_COUNT,
   ARCANA_CARD_NAMES,
@@ -159,7 +160,7 @@ export default function App() {
                   </td>
 
                   <td className="group-start">
-                    <Select value={s.equipment} options={EQUIPMENT_VALUES} onChange={(v) => update(skill, "equipment", v)} />
+                    <Select value={s.equipment} options={skillsWith30.includes(skill) ? EQUIPMENT_VALUES : EQUIPMENT_VALUES_LIMITED} onChange={(v) => update(skill, "equipment", v)} />
                   </td>
 
                   {s.arcana.map((val, idx) => {
