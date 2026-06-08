@@ -121,6 +121,7 @@ export default function App() {
           <thead>
             <tr>
               <th className="th-skill">스킬</th>
+              <th className="th-status">상태</th>
               <th>목표 ⭐</th>
               <th className="group-start"><span className="th-inner">스킬포인트 <small>0~10</small></span></th>
               <th className="group-start"><span className="th-inner">데바니온 <small>0~4</small></span></th>
@@ -129,7 +130,6 @@ export default function App() {
                 <th key={i} className={i === 0 ? "group-start" : ""}><span className="th-inner">{name} <small>0~4</small></span></th>
               ))}
               <th className="group-start col-summary">합계</th>
-              <th className="col-summary">상태</th>
             </tr>
           </thead>
           <tbody>
@@ -143,6 +143,14 @@ export default function App() {
               return (
                 <tr key={skill} className={inactive ? "row-disabled" : reached ? "row-ok" : "row-lack"}>
                   <td className="td-skill" style={{fontFamily: "'Jua', sans-serif", fontSize: '15px', letterSpacing: '0.3px'}}>{skill}</td>
+
+                  <td className="col-summary">
+                    {s.target === 0 ? null : reached ? (
+                      <span className="badge badge-ok">✓ 달성{diff > 0 ? ` +${diff}` : ""}</span>
+                    ) : (
+                      <span className="badge badge-lack">{diff} 부족</span>
+                    )}
+                  </td>
 
                   <td>
                     <Select
@@ -179,14 +187,6 @@ export default function App() {
 
                   <td className={`group-start col-summary total-val ${inactive ? "" : reached ? "total-ok" : "total-lack"}`}>
                     <strong>{total}</strong>
-                  </td>
-
-                  <td className="col-summary">
-                    {s.target === 0 ? null : reached ? (
-                      <span className="badge badge-ok">✓ 달성{diff > 0 ? ` +${diff}` : ""}</span>
-                    ) : (
-                      <span className="badge badge-lack">{diff} 부족</span>
-                    )}
                   </td>
                 </tr>
               );

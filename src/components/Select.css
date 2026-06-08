@@ -55,6 +55,11 @@
   z-index: 100;
 }
 
+.cselect__dropdown--up {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
 .cselect__option {
   padding: 6px 10px;
   border-radius: 5px;

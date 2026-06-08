@@ -3,6 +3,7 @@ import "./Select.css";
 
 export default function Select({ value, onChange, options }) {
   const [open, setOpen] = useState(false);
+  const [openUp, setOpenUp] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -13,11 +14,20 @@ export default function Select({ value, onChange, options }) {
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
+  function handleToggle() {
+    if (!open && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      setOpenUp(spaceBelow < 160);
+    }
+    setOpen((v) => !v);
+  }
+
   return (
     <div className={`cselect ${open ? "cselect--open" : ""}`} ref={ref}>
       <button
         className="cselect__trigger"
-        onClick={() => setOpen((v) => !v)}
+        onClick={handleToggle}
         type="button"
       >
         <span>{value}</span>
@@ -27,7 +37,7 @@ export default function Select({ value, onChange, options }) {
       </button>
 
       {open && (
-        <ul className="cselect__dropdown">
+        <ul className={`cselect__dropdown ${openUp ? "cselect__dropdown--up" : ""}`}>
           {options.map((opt) => (
             <li
               key={opt}

@@ -103,7 +103,7 @@ body {
 
 .skill-table th,
 .skill-table td {
-  width: 80px;
+  width: 72px;
 }
 
 /* ── 헤더 행 ── */
@@ -138,7 +138,7 @@ body {
 
 /* ── 데이터 행 ── */
 .skill-table td {
-  padding: 6px 10px;
+  padding: 3px 12px;
   text-align: center;
   border-bottom: 1px solid #e8eaf2;
 }
@@ -150,6 +150,14 @@ body {
 
 .th-skill {
   text-align: center !important;
+}
+
+.th-status {
+  width: 80px;
+}
+
+.col-summary {
+  width: 52px;
 }
 
 .td-skill {
@@ -164,8 +172,7 @@ body {
   font-weight: 600;
   font-size: 13px;
   color: #1a1d2e;
-  padding-left: 28px;
-  padding-right: 24px;
+  padding: 3px 12px;
   font-family: "CookieRun", "Pretendard", sans-serif;
 }
 
@@ -236,10 +243,10 @@ select:focus { outline: none; background-color: #fff; border-color: #1a1d2e; }
 /* ── 뱃지 ── */
 .badge {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  min-width: 60px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .badge-ok {
@@ -247,7 +254,7 @@ select:focus { outline: none; background-color: #fff; border-color: #1a1d2e; }
   color: #2060c8;
   border: 1px solid #c0d4f8;
   border-radius: 5px;
-  padding: 2px 10px;
+  padding: 2px 6px;
 }
 
 .badge-lack {
@@ -255,5 +262,5 @@ select:focus { outline: none; background-color: #fff; border-color: #1a1d2e; }
   color: #c02828;
   border: 1px solid #f5c0bc;
   border-radius: 5px;
-  padding: 2px 10px;
+  padding: 2px 6px;
 }
