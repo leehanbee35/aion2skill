@@ -1,11 +1,17 @@
-* {
+@font-face {
+  font-family: 'MapleStory';
+  src: url('./fonts/MapleStory-Bold.woff') format('woff');
+  font-weight: 400 900;
+}
+
+*  {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
   background: #f7f8fa;
   color: #1a1d2e;
   min-height: 100vh;
@@ -23,8 +29,15 @@ body {
   margin-bottom: 12px;
 }
 
+.header-credit {
+  margin-left: auto;
+  font-size: 11px;
+  color: #b0b4c8;
+  white-space: nowrap;
+}
+
 .app-header h1 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: #1a1d2e;
   letter-spacing: -0.3px;
@@ -149,6 +162,7 @@ body {
   color: #1a1d2e;
   padding-left: 28px;
   padding-right: 24px;
+  font-family: "CookieRun", "Pretendard", sans-serif;
 }
 
 /* ── 행 상태 ── */

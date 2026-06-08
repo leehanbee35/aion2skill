@@ -101,7 +101,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>오리 스킬계산기</h1>
+        <h1>스킬 계산기</h1>
         <div className="tabs">
           {CLASSES.map((cls) => (
             <button
@@ -113,6 +113,7 @@ export default function App() {
             </button>
           ))}
         </div>
+        <span className="header-credit">[시엘] 오리 레기온 제작</span>
       </header>
 
       <div className="table-scroll">
@@ -141,7 +142,7 @@ export default function App() {
 
               return (
                 <tr key={skill} className={inactive ? "row-disabled" : reached ? "row-ok" : "row-lack"}>
-                  <td className="td-skill">{skill}</td>
+                  <td className="td-skill" style={{fontFamily: "'MapleStory', sans-serif", fontWeight: 700, fontSize: '14px', letterSpacing: '0.3px', WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale'}}>{skill}</td>
 
                   <td>
                     <Select
