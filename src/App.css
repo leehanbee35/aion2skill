@@ -1,10 +1,7 @@
-@font-face {
-  font-family: 'MapleStory';
-  src: url('./fonts/MapleStory-Bold.woff') format('woff');
-  font-weight: 400 900;
-}
 
-*  {
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Roboto+Mono:wght@400;600&display=swap');
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -148,8 +145,15 @@ body {
 
 .th-skill,
 .td-skill {
-  text-align: left !important;
   width: 110px;
+}
+
+.th-skill {
+  text-align: center !important;
+}
+
+.td-skill {
+  text-align: left !important;
 }
 
 .th-skill {
@@ -223,6 +227,7 @@ select:focus { outline: none; background-color: #fff; border-color: #1a1d2e; }
 .total-val {
   font-size: 15px;
   font-weight: 700;
+  font-family: "Roboto Mono", monospace;
 }
 
 .total-ok   { color: #3070d0; }

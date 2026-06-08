@@ -142,7 +142,7 @@ export default function App() {
 
               return (
                 <tr key={skill} className={inactive ? "row-disabled" : reached ? "row-ok" : "row-lack"}>
-                  <td className="td-skill" style={{fontFamily: "'MapleStory', sans-serif", fontWeight: 700, fontSize: '14px', letterSpacing: '0.3px', WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale'}}>{skill}</td>
+                  <td className="td-skill" style={{fontFamily: "'Jua', sans-serif", fontSize: '16px', letterSpacing: '0.3px'}}>{skill}</td>
 
                   <td>
                     <Select
