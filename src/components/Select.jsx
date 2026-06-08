@@ -18,7 +18,8 @@ export default function Select({ value, onChange, options }) {
     if (!open && ref.current) {
       const rect = ref.current.getBoundingClientRect();
       const spaceBelow = window.innerHeight - rect.bottom;
-      setOpenUp(spaceBelow < 160);
+      const dropdownHeight = options.length * 32 + 8;
+      setOpenUp(spaceBelow < dropdownHeight);
     }
     setOpen((v) => !v);
   }

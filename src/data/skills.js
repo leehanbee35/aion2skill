@@ -66,7 +66,7 @@ export const CLASS_SKILLS = {
 
 export const CLASSES = Object.keys(CLASS_SKILLS);
 
-export const TARGET_OPTIONS = [0, 16, 20];
+export const TARGET_OPTIONS = [0, 12, 16, 20];
 export const TARGET_OPTIONS_30 = [0, 16, 20, 30];
 
 // 목표 30까지 가능한 스킬 (직업별)
